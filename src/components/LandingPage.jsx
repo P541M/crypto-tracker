@@ -7,40 +7,37 @@ const LandingPage = () => {
       <div className="absolute top-8 right-8 max-w-lg tracking-wider">
         <Typing
           text={[
-            "Cryptocurrency is a digital or virtual currency that uses cryptography for security, making it hard to counterfeit. Operating on decentralized networks based on blockchain technology, cryptocurrencies ensure secure, transparent transactions. Bitcoin, created in 2009 by Satoshi Nakamoto, was the first and remains the most popular cryptocurrency. They offer benefits like lower transaction costs and increased privacy but also face challenges like regulatory uncertainty, market volatility, and security risks. Beyond finance, cryptocurrencies are influencing sectors like supply chain management, healthcare, and digital identity verification.",
+            "Cryptocurrency is a digital or virtual currency that uses cryptography for security, making it hard to counterfeit. Operating on decentralized networks based on blockchain technology, cryptocurrencies ensure secure, transparent transactions.",
           ]}
-          speed={15}
+          speed={10}
           eraseSpeed={0}
-          eraseDelay={1000000000} // Set a very large number to effectively prevent erasing
+          eraseDelay={1000000000}
           typingDelay={100}
-          displayTextRenderer={(text, i) => {
+          displayTextRenderer={(text) => {
             return <p className="text-4xl leading-7">{text}</p>;
           }}
         />
       </div>
       <div className="absolute top-20 left-20 text-left">
         <h1 id="title" className="font-bold text-9xl mb-5 tracking-tighter">
-          CRYPTo EL1Te
+          CRYPTO ELITE
         </h1>
         <p id="slogan" className="text-6xl mb-10 tracking-wide">
-          Sh0wcasing TH3
+          Showcasing the
         </p>
         <p id="slogan" className="text-6xl m-8 tracking-wide">
-          T0P
+          Top
         </p>
         <p id="slogan" className="text-6xl mb-8 tracking-wide">
-          Crypt0currencies
+          Cryptocurrencies
         </p>
       </div>
 
       <div className="absolute bottom-4 left-4 text-left">
-        <p className="text-lg tracking-wide">Designed</p>
-        <p className="text-lg tracking-wider">By</p>
-        <p className="text-lg tracking-widest">3leazar</p>
-        <p className="text-lg tracking-widest">V I D E N 4</p>
+        <p className="text-lg tracking-wide">Designed by "VIDEN4" - 3leazar</p>
       </div>
 
-      <footer className="absolute bottom-4 right-4">© 2023 CRYPTo EL1Te</footer>
+      <footer className="absolute bottom-4 right-4">© 2023 CRYPTO ELITE</footer>
     </div>
   );
 };
