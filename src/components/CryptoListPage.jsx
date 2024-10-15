@@ -68,26 +68,21 @@ const CryptoListPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-bg text-text p-10">
-      <div
-        className="absolute top-0 left-0 w-full h-full opacity-5 bg-center bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url('/path/to/vaultcoinlogo.png')` }}
-      ></div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+    <div className="relative text-text p-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 z-10">
         {cryptos.map((crypto, index) => (
           <div
             key={crypto.id}
-            className="p-6 rounded-lg bg-bgContrast shadow-lg relative"
+            className="p-8 rounded-lg bg-bgContrast shadow-lg relative z-10"
           >
-            <h1 className="text-4xl font-bold tracking-widest uppercase">
+            <h1 className="text-4xl font-bold tracking-widest uppercase mb-4">
               {crypto.name} ({crypto.symbol.toUpperCase()})
             </h1>
-            <p className="text-3xl">
+            <p className="text-3xl mb-2">
               ${parseFloat(crypto.priceUsd).toFixed(2)}
             </p>
             <p
-              className={`text-xl ${
+              className={`text-xl mb-4 ${
                 parseFloat(crypto.changePercent24Hr) > 0
                   ? "text-green-500"
                   : "text-red-500"
@@ -97,7 +92,7 @@ const CryptoListPage = () => {
               {parseFloat(crypto.changePercent24Hr).toFixed(2)}%
             </p>
 
-            <p className="text-lg mt-4">
+            <p className="text-lg leading-6 mb-6">
               {blurbs[crypto.id] ||
                 "Information on this cryptocurrency is currently not available."}
             </p>
