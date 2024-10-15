@@ -4,12 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        text: "#FFFFFF", // Text colour
-        bg: "#000000", // Background colour
-        primary: "#A6CACC", // Main colour
-        secondary: "#00ffff", // Other main colour
-        accent: "#8D70AE", // Accent colour
-        bgContrast: "#040707", // Darker contrast background
+        text: "#EDEDED", // Softer white
+        bg: "#1C1C1C", // Matte black
+        primary: "#D3CEC4", // Subtle beige
+        accent: "#8D70AE", // Could remain, but muted version
+        bgContrast: "#2C2C2C", // Softer contrast
       },
     },
   },

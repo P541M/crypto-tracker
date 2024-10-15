@@ -3,18 +3,17 @@
 @tailwind utilities;
 
 body {
-  font-family: "Helvetica", sans-serif;
+  font-family: "Neue Helvetica", sans-serif;
 }
 
-/* Hide scroll bar while maintaining scroll functionality */
 html {
-  overflow: -moz-scrollbars-none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   scroll-behavior: smooth;
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
   scroll-behavior: smooth;
 }

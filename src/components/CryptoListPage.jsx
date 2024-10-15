@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Typing from "react-typing-effect";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -55,14 +54,15 @@ const CryptoListPage = () => {
   };
 
   const sampleChartData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     datasets: [
       {
-        label: "Price Trend",
+        label: "Price",
         data: [30000, 32000, 31000, 33000, 35000, 34000, 36000],
-        borderColor: "rgba(255, 255, 255, 0.7)",
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        fill: true,
+        borderColor: "#EDEDED",
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        pointRadius: 0,
+        borderWidth: 2,
       },
     ],
   };
@@ -71,7 +71,7 @@ const CryptoListPage = () => {
     <div className="relative min-h-screen bg-bg text-text p-10">
       <div
         className="absolute top-0 left-0 w-full h-full opacity-5 bg-center bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url('/path/to/cryptologo.png')` }}
+        style={{ backgroundImage: `url('/path/to/vaultcoinlogo.png')` }}
       ></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -80,7 +80,7 @@ const CryptoListPage = () => {
             key={crypto.id}
             className="p-6 rounded-lg bg-bgContrast shadow-lg relative"
           >
-            <h1 className="text-4xl font-bold tracking-tight uppercase">
+            <h1 className="text-4xl font-bold tracking-widest uppercase">
               {crypto.name} ({crypto.symbol.toUpperCase()})
             </h1>
             <p className="text-3xl">
@@ -97,16 +97,10 @@ const CryptoListPage = () => {
               {parseFloat(crypto.changePercent24Hr).toFixed(2)}%
             </p>
 
-            <Typing
-              text={[
-                blurbs[crypto.id] ||
-                  "Information on this cryptocurrency is currently not available.",
-              ]}
-              speed={10}
-              eraseSpeed={0}
-              eraseDelay={1000000000}
-              className="text-lg mt-4"
-            />
+            <p className="text-lg mt-4">
+              {blurbs[crypto.id] ||
+                "Information on this cryptocurrency is currently not available."}
+            </p>
 
             <div className="mt-4">
               <Line
