@@ -24,6 +24,8 @@ ChartJS.register(
 
 const CryptoListPage = () => {
   const [cryptos, setCryptos] = useState([]);
+  const [exchangeRates, setExchangeRates] = useState({});
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
 
   useEffect(() => {
     axios
@@ -31,12 +33,35 @@ const CryptoListPage = () => {
       .then((response) => {
         const topCryptos = response.data.data.slice(0, 6);
         setCryptos(topCryptos);
-        console.log(topCryptos.map((crypto) => crypto.id));
       })
       .catch((error) => {
         console.error("Error fetching data from CoinCap API", error);
       });
+
+    axios
+      .get("https://api.coincap.io/v2/rates")
+      .then((response) => {
+        const rates = response.data.data.reduce((acc, rate) => {
+          acc[rate.symbol] = parseFloat(rate.rateUsd);
+          return acc;
+        }, {});
+        setExchangeRates(rates);
+      })
+      .catch((error) => {
+        console.error("Error fetching exchange rates from CoinCap API", error);
+      });
   }, []);
+
+  const handleCurrencyChange = (event) => {
+    setSelectedCurrency(event.target.value);
+  };
+
+  const convertPrice = (priceUsd) => {
+    if (selectedCurrency === "USD") return priceUsd;
+    const rate = exchangeRates[selectedCurrency];
+    if (!rate) return priceUsd;
+    return priceUsd * rate;
+  };
 
   const blurbs = {
     bitcoin:
@@ -45,7 +70,7 @@ const CryptoListPage = () => {
       "Ethereum is a decentralized platform that enables smart contracts and decentralized applications (DApps) to be built and run without any downtime, fraud, control, or interference from a third party.",
     tether:
       "Tether is a type of cryptocurrency known as a stablecoin. It aims to keep cryptocurrency valuations stable, as opposed to the wide fluctuations observed in the prices of other popular cryptocurrencies like Bitcoin and Ethereum.",
-    binancecoin:
+    "binance-coin":
       "BNB is the native cryptocurrency of the Binance exchange, one of the largest cryptocurrency exchanges in the world. Initially launched as a utility token to pay for trading fees at a discounted rate, BNB has grown in utility, powering the Binance Smart Chain (BSC) for decentralized applications (DApps), DeFi projects, and smart contracts.",
     solana:
       "Solana is a high-performance blockchain platform designed for decentralized applications (DApps) and cryptocurrencies. Known for its lightning-fast transaction speeds and low fees, Solana aims to address the scalability issues that plague other blockchain platforms like Ethereum.",
@@ -69,6 +94,24 @@ const CryptoListPage = () => {
 
   return (
     <div className="relative text-text p-10">
+      <div className="mb-6">
+        <label htmlFor="currency" className="text-xl mr-4">
+          Select Currency:
+        </label>
+        <select
+          id="currency"
+          className="p-2 rounded bg-bgContrast text-white"
+          value={selectedCurrency}
+          onChange={handleCurrencyChange}
+        >
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="JPY">JPY</option>
+          <option value="CAD">CAD</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 z-10">
         {cryptos.map((crypto, index) => (
           <div
@@ -79,7 +122,8 @@ const CryptoListPage = () => {
               {crypto.name} ({crypto.symbol.toUpperCase()})
             </h1>
             <p className="text-3xl mb-2">
-              ${parseFloat(crypto.priceUsd).toFixed(2)}
+              {selectedCurrency} $
+              {parseFloat(convertPrice(crypto.priceUsd)).toFixed(2)}
             </p>
             <p
               className={`text-xl mb-4 ${
