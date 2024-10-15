@@ -60,7 +60,7 @@ const CryptoListPage = () => {
     if (selectedCurrency === "USD") return priceUsd;
     const rate = exchangeRates[selectedCurrency];
     if (!rate) return priceUsd;
-    return priceUsd * rate;
+    return priceUsd / rate;
   };
 
   const blurbs = {
