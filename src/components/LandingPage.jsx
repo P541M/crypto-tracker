@@ -8,7 +8,7 @@ const LandingPage = () => {
           id="title"
           className="font-bold text-9xl mb-5 tracking-widest uppercase"
         >
-          VAULT | COIN
+          V/\ULT
         </h1>
         <p id="slogan" className="text-5xl mb-6 tracking-wide uppercase">
           Precision in Crypto Excellence
@@ -34,7 +34,7 @@ const LandingPage = () => {
             "3LEAZAR"
           </a>
         </p>
-        <p className="tracking-wide">© 2024 VAULT | COIN</p>
+        <p className="tracking-wide">© 2024 V/\ULT</p>
       </footer>
     </div>
   );

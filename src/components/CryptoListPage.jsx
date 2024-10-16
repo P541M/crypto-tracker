@@ -120,19 +120,86 @@ const CryptoListPage = () => {
     const data = historicalData[cryptoId];
     if (!data) return null;
 
+    const gradient = (ctx) => {
+      const chart = ctx.chart;
+      const { ctx: context, chartArea } = chart;
+      if (!chartArea) {
+        return null;
+      }
+      const gradientFill = context.createLinearGradient(
+        0,
+        0,
+        0,
+        chartArea.bottom
+      );
+      gradientFill.addColorStop(0, "rgba(173, 216, 230, 0.5)");
+      gradientFill.addColorStop(1, "rgba(173, 216, 230, 0)");
+      return gradientFill;
+    };
+
     return {
       labels: data.map((point) => new Date(point.time).toLocaleDateString()),
       datasets: [
         {
           label: "Price",
           data: data.map((point) => parseFloat(convertPrice(point.priceUsd))),
-          borderColor: "#EDEDED",
-          backgroundColor: "rgba(255, 255, 255, 0)",
+          borderColor: "#76c7c0",
+          backgroundColor: gradient,
           pointRadius: 0,
           borderWidth: 2,
+          tension: 0.4, // Smooth curves
         },
       ],
     };
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false, // Hide legend
+      },
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            return `${
+              currencySymbols[selectedCurrency]
+            } ${tooltipItem.raw.toFixed(2)}`;
+          },
+        },
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        titleColor: "#000",
+        bodyColor: "#000",
+        borderColor: "#ccc",
+        borderWidth: 1,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.3)", // Make x-axis gridlines more visible
+          lineWidth: 1.5, // Increase thickness of gridlines
+        },
+        ticks: {
+          maxTicksLimit: 6, // Limit number of x-axis labels
+        },
+      },
+      y: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.3)", // Make y-axis gridlines more visible
+          lineWidth: 1.5, // Increase thickness of gridlines
+          borderDash: [5, 5], // Dotted gridlines for y-axis
+        },
+        ticks: {
+          maxTicksLimit: 6, // Limit number of y-axis labels
+        },
+      },
+    },
+    hover: {
+      mode: "nearest",
+      intersect: false,
+    },
   };
 
   return (
@@ -188,7 +255,7 @@ const CryptoListPage = () => {
               {historicalData[crypto.id] ? (
                 <Line
                   data={getChartData(crypto.id)}
-                  options={{ maintainAspectRatio: false }}
+                  options={chartOptions}
                   height={150}
                   key={`chart-${index}`}
                 />
