@@ -132,8 +132,8 @@ const CryptoListPage = () => {
         0,
         chartArea.bottom
       );
-      gradientFill.addColorStop(0, "rgba(173, 216, 230, 0.5)");
-      gradientFill.addColorStop(1, "rgba(173, 216, 230, 0)");
+      gradientFill.addColorStop(0, "rgba(211, 206, 196, 0.5)");
+      gradientFill.addColorStop(1, "rgba(211, 206, 196, 0)");
       return gradientFill;
     };
 
@@ -143,7 +143,7 @@ const CryptoListPage = () => {
         {
           label: "Price",
           data: data.map((point) => parseFloat(convertPrice(point.priceUsd))),
-          borderColor: "#76c7c0",
+          borderColor: "#8D70AE",
           backgroundColor: gradient,
           pointRadius: 0,
           borderWidth: 2,

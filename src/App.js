@@ -15,7 +15,7 @@ function App() {
       <div className="relative z-10">
         <LandingPage />
 
-        <div className="text-center pt-36 py-12 px-6 max-w-3xl mx-auto">
+        <div className="text-center pt-36 py-12 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4 tracking-wider uppercase">
             A Glimpse into the World’s Leading Cryptocurrencies
           </h2>
