@@ -25,9 +25,9 @@ ChartJS.register(
 const CryptoListPage = () => {
   const [cryptos, setCryptos] = useState([]);
   const [exchangeRates, setExchangeRates] = useState({});
+  const [historicalData, setHistoricalData] = useState({});
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
 
-  // Mapping of currency codes to symbols
   const currencySymbols = {
     USD: "$",
     EUR: "€",
@@ -42,6 +42,9 @@ const CryptoListPage = () => {
       .then((response) => {
         const topCryptos = response.data.data.slice(0, 6);
         setCryptos(topCryptos);
+        topCryptos.forEach((crypto) => {
+          fetchHistoricalData(crypto.id);
+        });
       })
       .catch((error) => {
         console.error("Error fetching data from CoinCap API", error);
@@ -60,6 +63,25 @@ const CryptoListPage = () => {
         console.error("Error fetching exchange rates from CoinCap API", error);
       });
   }, []);
+
+  const fetchHistoricalData = (cryptoId) => {
+    axios
+      .get(`https://api.coincap.io/v2/assets/${cryptoId}/history?interval=d1`)
+      .then((response) => {
+        const prices = response.data.data.map((point) => ({
+          time: point.date,
+          priceUsd: point.priceUsd,
+        }));
+
+        setHistoricalData((prevData) => ({
+          ...prevData,
+          [cryptoId]: prices,
+        }));
+      })
+      .catch((error) => {
+        console.error(`Error fetching historical data for ${cryptoId}`, error);
+      });
+  };
 
   const handleCurrencyChange = (event) => {
     setSelectedCurrency(event.target.value);
@@ -94,18 +116,23 @@ const CryptoListPage = () => {
       "USD Coin (USDC) is a stablecoin that is pegged 1:1 to the US dollar, providing stability in the often volatile cryptocurrency market. Each USDC is backed by fully reserved assets, making it a popular choice for those looking for the stability of fiat currencies with the flexibility of cryptocurrencies.",
   };
 
-  const sampleChartData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-    datasets: [
-      {
-        label: "Price",
-        data: [30000, 32000, 31000, 33000, 35000, 34000, 36000],
-        borderColor: "#EDEDED",
-        backgroundColor: "rgba(255, 255, 255, 0)",
-        pointRadius: 0,
-        borderWidth: 2,
-      },
-    ],
+  const getChartData = (cryptoId) => {
+    const data = historicalData[cryptoId];
+    if (!data) return null;
+
+    return {
+      labels: data.map((point) => new Date(point.time).toLocaleDateString()),
+      datasets: [
+        {
+          label: "Price",
+          data: data.map((point) => parseFloat(convertPrice(point.priceUsd))),
+          borderColor: "#EDEDED",
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          pointRadius: 0,
+          borderWidth: 2,
+        },
+      ],
+    };
   };
 
   return (
@@ -158,12 +185,16 @@ const CryptoListPage = () => {
             </p>
 
             <div className="mt-4">
-              <Line
-                data={sampleChartData}
-                options={{ maintainAspectRatio: false }}
-                height={150}
-                key={`chart-${index}`}
-              />
+              {historicalData[crypto.id] ? (
+                <Line
+                  data={getChartData(crypto.id)}
+                  options={{ maintainAspectRatio: false }}
+                  height={150}
+                  key={`chart-${index}`}
+                />
+              ) : (
+                <p>Loading chart data...</p>
+              )}
             </div>
           </div>
         ))}
