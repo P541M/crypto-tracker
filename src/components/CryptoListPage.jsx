@@ -27,6 +27,15 @@ const CryptoListPage = () => {
   const [exchangeRates, setExchangeRates] = useState({});
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
 
+  // Mapping of currency codes to symbols
+  const currencySymbols = {
+    USD: "$",
+    EUR: "€",
+    GBP: "£",
+    JPY: "¥",
+    CAD: "C$",
+  };
+
   useEffect(() => {
     axios
       .get("https://api.coincap.io/v2/assets")
@@ -61,6 +70,13 @@ const CryptoListPage = () => {
     const rate = exchangeRates[selectedCurrency];
     if (!rate) return priceUsd;
     return priceUsd / rate;
+  };
+
+  const formatPrice = (price) => {
+    return parseFloat(price).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   };
 
   const blurbs = {
@@ -122,8 +138,8 @@ const CryptoListPage = () => {
               {crypto.name} ({crypto.symbol.toUpperCase()})
             </h1>
             <p className="text-3xl mb-2">
-              {selectedCurrency} $
-              {parseFloat(convertPrice(crypto.priceUsd)).toFixed(2)}
+              {currencySymbols[selectedCurrency]}{" "}
+              {formatPrice(convertPrice(crypto.priceUsd))}
             </p>
             <p
               className={`text-xl mb-4 ${
