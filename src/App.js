@@ -31,10 +31,7 @@ function App() {
       <div className="absolute inset-0 z-0">
         <div className="bg-gradient-to-r from-primary via-bgContrast to-bg opacity-30 w-full h-full"></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-accent blur-3xl opacity-40 rounded-full"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary blur-3xl opacity-40 rounded-full"></div>
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary blur-2xl opacity-20 rounded-full"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-accent blur-3xl opacity-25 rounded-full"></div>
-        <div className="absolute top-0 right-1/2 w-40 h-40 bg-secondary blur-2xl opacity-30 rounded-full"></div>
         <div className="absolute inset-0 grid-background"></div>
       </div>
 
