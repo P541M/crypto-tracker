@@ -147,7 +147,7 @@ const CryptoListPage = () => {
           backgroundColor: gradient,
           pointRadius: 0,
           borderWidth: 2,
-          tension: 0.4, // Smooth curves
+          tension: 0.4,
         },
       ],
     };
@@ -158,7 +158,7 @@ const CryptoListPage = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // Hide legend
+        display: false,
       },
       tooltip: {
         callbacks: {
@@ -178,21 +178,21 @@ const CryptoListPage = () => {
     scales: {
       x: {
         grid: {
-          color: "rgba(255, 255, 255, 0.3)", // Make x-axis gridlines more visible
-          lineWidth: 1.5, // Increase thickness of gridlines
+          color: "rgba(255, 255, 255, 0.3)",
+          lineWidth: 1.5,
         },
         ticks: {
-          maxTicksLimit: 6, // Limit number of x-axis labels
+          maxTicksLimit: 6,
         },
       },
       y: {
         grid: {
-          color: "rgba(255, 255, 255, 0.3)", // Make y-axis gridlines more visible
-          lineWidth: 1.5, // Increase thickness of gridlines
-          borderDash: [5, 5], // Dotted gridlines for y-axis
+          color: "rgba(255, 255, 255, 0.3)",
+          lineWidth: 1.5,
+          borderDash: [5, 5],
         },
         ticks: {
-          maxTicksLimit: 6, // Limit number of y-axis labels
+          maxTicksLimit: 6,
         },
       },
     },

@@ -13,13 +13,6 @@ const LandingPage = () => {
         <p id="slogan" className="text-5xl mb-6 tracking-wide uppercase">
           Precision in Crypto Excellence
         </p>
-
-        <p className="text-3xl leading-8 max-w-2xl mx-auto tracking-wide mb-10">
-          Cryptocurrency is a digital or virtual currency that uses cryptography
-          for security, making it hard to counterfeit. Operating on
-          decentralized networks based on blockchain technology,
-          cryptocurrencies ensure secure, transparent transactions.
-        </p>
       </div>
 
       <footer className="fixed bottom-4 right-4 z-50 flex flex-col items-end text-sm space-y-1">
