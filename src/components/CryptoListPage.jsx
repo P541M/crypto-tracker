@@ -203,7 +203,7 @@ const CryptoListPage = () => {
   };
 
   return (
-    <div className="relative text-text p-10">
+    <div className="relative text-text p-4 md:p-10">
       <div className="mb-6">
         <label htmlFor="currency" className="text-xl mr-4">
           Select Currency:
@@ -222,21 +222,21 @@ const CryptoListPage = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 z-10">
         {cryptos.map((crypto, index) => (
           <div
             key={crypto.id}
-            className="p-8 rounded-lg bg-bgContrast shadow-lg relative z-10"
+            className="p-6 md:p-8 rounded-lg bg-bgContrast shadow-lg relative z-10"
           >
-            <h1 className="text-4xl font-bold tracking-widest uppercase mb-4">
+            <h1 className="text-2xl md:text-4xl font-bold tracking-widest uppercase mb-4">
               {crypto.name} ({crypto.symbol.toUpperCase()})
             </h1>
-            <p className="text-3xl mb-2">
+            <p className="text-xl md:text-3xl mb-2">
               {currencySymbols[selectedCurrency]}{" "}
               {formatPrice(convertPrice(crypto.priceUsd))}
             </p>
             <p
-              className={`text-xl mb-4 ${
+              className={`text-md md:text-xl mb-4 ${
                 parseFloat(crypto.changePercent24Hr) > 0
                   ? "text-green-500"
                   : "text-red-500"
@@ -246,7 +246,7 @@ const CryptoListPage = () => {
               {parseFloat(crypto.changePercent24Hr).toFixed(2)}%
             </p>
 
-            <p className="text-lg leading-6 mb-6">
+            <p className="text-sm md:text-lg leading-6 mb-6">
               {blurbs[crypto.id] ||
                 "Information on this cryptocurrency is currently not available."}
             </p>

@@ -2,15 +2,18 @@ import React from "react";
 
 const LandingPage = () => {
   return (
-    <div className="text-text h-screen flex flex-col justify-center items-center relative">
+    <div className="text-text h-screen flex flex-col justify-center items-center relative p-4 md:p-0">
       <div className="z-10 text-center">
         <h1
           id="title"
-          className="font-bold text-9xl mb-5 tracking-widest uppercase"
+          className="font-bold text-6xl md:text-9xl mb-5 tracking-widest uppercase"
         >
           V/\ULT
         </h1>
-        <p id="slogan" className="text-5xl mb-6 tracking-wide uppercase">
+        <p
+          id="slogan"
+          className="text-2xl md:text-5xl mb-6 tracking-wide uppercase"
+        >
           Precision in Crypto Excellence
         </p>
       </div>
